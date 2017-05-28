@@ -11,6 +11,9 @@ var mongo = require('mongodb');
 var passport = require('passport');
 var expressValidator = require('express-validator');
 var session = require('express-session');
+var http = require('http');
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 const port = process.env.PORT || 8080 ;
 
 
@@ -85,4 +88,8 @@ require('./config/passport')(passport);
 app.use('/', router);
 app.listen(port, function () {
   console.log("server is listening on port" + port);
-})
+});
+
+io.sockets.on('connection',function(socket){
+  
+});
