@@ -13,7 +13,9 @@ import { AuthService } from './services/auth.service';
 
 const appRoutes: Routes =
 [
-  {path:'home',component: HomeComponent}
+  {path:'home',component: HomeComponent},
+  {path:'chat',component: ChatComponent},
+  {path:'',component: HomeComponent}
 ]
 @NgModule({
   declarations: [

@@ -8,25 +8,71 @@ import { tokenNotExpired } from 'angular2-jwt';
 export class AuthService {
   authToken: any;
   user: any;
+  username:string;
   isDev: boolean;
   rootURL: String;
   constructor(private http: Http) {
     this.isDev = false;
   }
-
+  sendmesg(message){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    let ep = this.prepEndpoint('send');
+    return this.http.post(ep, message,{ headers: headers })
+      .map(res => res.json());
+  }
+  getChat(username1,username2) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    let ep = this.prepEndpoint('chat/'+ username1 +'/'+ username2);
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json());
+  }
+  getChats()
+  {
+    this.username = localStorage.getItem('storedUsername');
+    console.log(this.username);
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    let ep = this.prepEndpoint('chats/'+ this.username);
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json());
+  }
+  getAllUsers() {
+    this.username = localStorage.getItem('storedUsername');
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    let ep = this.prepEndpoint('allusers/' + this.username);
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json());
+  }
   registerUser(user) {
     let headers = new Headers();
     let ep = this.prepEndpoint('signup');
-    console.log("ra7")
     return this.http.post(ep, user, { headers: headers })
       .map(res => res.json());
   }
 
-  loginUser(user) {
+  loginUser(user)
+  {
     let headers = new Headers();
     let ep = this.prepEndpoint('login');
     return this.http.post(ep, user, { headers: headers })
       .map(res => res.json());
+  }
+
+  storeData(data)
+  {
+    localStorage.setItem('storedUsername', data.user.username);
+    localStorage.setItem('id_token', data.token);
   }
 
   loadToken() {
@@ -36,6 +82,12 @@ export class AuthService {
 
   loggedIn() {
     return tokenNotExpired() && this.user != null;
+  }
+  storeUserData(token, user) {
+    localStorage.setItem('id_token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.authToken = token;
+    this.user = user;
   }
 
   logout() {

@@ -16,6 +16,14 @@ export class ChatComponent implements OnInit {
   myusers: [String];
   allusers:[String];
   content: String;
+  //time:[Date];
+  //messages:[String];
+  //sender:[String];
+  messages:[{
+    content: String,
+    time: Date,
+    sender: String
+  }]
   /*
   const message = {
     content: String,
@@ -35,7 +43,96 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.authService.getAllUsers().subscribe(data =>
+    {
+      if(data.success)
+      {
+        this.allusers = data.allusers;
+        this.username1 = data.username1;
+      }else {
+        console.log(data.allusers);
+        this.flashMessage.show('Something went wrong', { cssClass: 'alert-dang', timeout: 4000 });
+        //this.router.navigate(['/chat']);
+      }
+    },
+      err => {
+        this.flashMessage.show("You are not authorized,Please log in", { cssClass: 'alert-dang', timeout: 3000 });
+        this.router.navigate(['/home']);
+        return false;
+      });
   }
+
+  onMyUsers(){
+      this.authService.getChats().subscribe(data =>
+      {
+        if(data.success)
+        {
+          this.myusers = data.chats;
+        }else {
+          console.log(data.chats);
+          this.flashMessage.show('Something went wrong', { cssClass: 'alert-dang', timeout: 4000 });
+          //this.router.navigate(['/chat']);
+        }
+      },
+        err => {
+          this.flashMessage.show("You are not authorized,Please log in", { cssClass: 'alert-dang', timeout: 3000 });
+          this.router.navigate(['/home']);
+          return false;
+        });
+  }
+
+  onChat(username2){
+    this.username2 = username2;
+    this.authService.getChat(this.username1,username2).subscribe(data =>
+    {
+      if(data.success)
+      {
+          console.log(data)
+          this.messages = data.chat.message;
+          //this.time.push(data.chat[i].message.date);
+          //this.messages.push(data.chat[i].message.content);
+      }else {
+        console.log(data.chat);
+        this.flashMessage.show('Something went wrong', { cssClass: 'alert-dang', timeout: 4000 });
+        //this.router.navigate(['/chat']);
+      }
+    },
+      err => {
+        this.flashMessage.show("You are not authorized,Please log in", { cssClass: 'alert-dang', timeout: 3000 });
+        this.router.navigate(['/home']);
+        return false;
+      });
+  }
+  onSend()
+  {
+    if(this.content)
+    {
+      const message = {
+        username1: this.username1,
+        username2: this.username2,
+        content: this.content
+      }
+      this.content = "";
+
+      this.authService.sendmesg(message).subscribe(data =>
+      {
+        if(data.success)
+        {
+          this.messages = data.newChat.message;
+        }else {
+          console.log(message);
+          this.flashMessage.show('Something went wrong', { cssClass: 'alert-dang', timeout: 4000 });
+          //this.router.navigate(['/chat']);
+        }
+      },
+        err => {
+          this.flashMessage.show("You are not authorized,Please log in", { cssClass: 'alert-dang', timeout: 3000 });
+          this.router.navigate(['/home']);
+          return false;
+        });
+
+      }
+  }
+
 
 }

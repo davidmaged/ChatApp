@@ -54,15 +54,15 @@ export class HomeComponent implements OnInit {
       window.scrollTo(0, 0);
       return false;
     }
-    console.log("valid");
     this.authService.registerUser(user).subscribe(data =>
     {
-      console.log("auth");
+      console.log(data)
       if (data.success) {
-        this.flashMessage.show('welcome to ChatApp', { cssClass: 'alert-sucs', timeout: 4000 });
+        this.authService.storeData(data);
+        this.flashMessage.show(data.message, { cssClass: 'alert-sucs', timeout: 4000 });
         this.router.navigate(['/chat']);
       } else {
-        this.flashMessage.show('Something went wrong , try again later', { cssClass: 'alert-dang', timeout: 4000 });
+        this.flashMessage.show(data.message, { cssClass: 'alert-dang', timeout: 4000 });
         this.router.navigate(['/home']);
       }
     },
@@ -79,11 +79,11 @@ export class HomeComponent implements OnInit {
       username: this.loginUsername,
       password: this.loginPassword
     }
-
     this.authService.loginUser(user).subscribe(data =>
     {
-      console.log("auth");
-      if (data.success) {
+      if(data.success)
+      {
+        this.authService.storeData(data);
         this.flashMessage.show(data.message, { cssClass: 'alert-sucs', timeout: 4000 });
         this.router.navigate(['/chat']);
       } else {

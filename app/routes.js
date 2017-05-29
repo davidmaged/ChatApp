@@ -12,7 +12,7 @@ router.post('/signup', userController.signup);
 router.post('/login',userController.login);
 router.get('/chats/:username', userController.passportauth, userController.openChat);
 router.get('/chat/:username1/:username2', userController.passportauth, userController.openMessage);
-router.get('/allusers', userController.passportauth, userController.allUsers);
+router.get('/allusers/:username', userController.passportauth, userController.allUsers);
 router.post('/send',userController.passportauth, userController.send);
 
 module.exports = router;

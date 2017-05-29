@@ -46,7 +46,24 @@ var userController = {
                 }else
                 {
                   console.log('habibi  '+ user)
-                  res.json({success: true, message:'Welcome ya latat'});
+                  var token = jwt.sign
+                  (
+                    {_id: user._id,username: user.username},
+                    secret.secret,
+                    {
+                      expiresIn: 10080 // in seconds
+                    }
+                  );
+                  res.json({
+                      success: true,
+                      token: 'JWT ' + token,
+                      user:
+                      {
+                        id: user._id,
+                        firstname: user.firstname,
+                        username: user.username,
+                      }
+                  });
                 }
               });
             });
@@ -142,8 +159,9 @@ var userController = {
 
   openMessage: function(req , res)
   {
+    //{$or:[{Username1:requesterUsername, Username2:requiredUsername},{Username1:requiredUsername, Username2:requesterUsername}]}
     if((req.params.username1 && req.params.username2)){
-      Chats.findOne({user1: req.params.username1, user2: req.params.username2},function(err,chat)
+      Chats.findOne({$or:[{user1: req.params.username1, user2: req.params.username2},{user1: req.params.username2, user2: req.params.username1}]},function(err,chat)
       {
         if(err)
           res.json({success: false, message: 'There is a Problem'});
@@ -187,7 +205,7 @@ var userController = {
                   if(err)
                     res.json({success: false, message: 'There is a Problem3'});
                   else {
-                    res.json({success: true, newChat, message: 'message sent to new chat'});
+                    res.json({success: true, newChat:newChat, message: 'message sent to new chat'});
                   }
                 });
             }else {
@@ -200,7 +218,7 @@ var userController = {
                   if(err)
                     res.json({success: false, message: 'There is a Problem4'});
                   else {
-                    res.json({success: true, chat2, message: 'message sent to chat'});
+                    res.json({success: true, newChat:chat2, message: 'message sent to chat'});
                   }
                 });
             }
@@ -215,7 +233,7 @@ var userController = {
               if(err)
                 res.json({success: false, message: 'There is a Problem4'});
               else {
-                res.json({success: true, chat, message: 'message sent to chat'});
+                res.json({success: true, newChat:chat, message: 'message sent to chat'});
               }
             });
           }
@@ -232,16 +250,21 @@ var userController = {
         var allusers = [];
         for(var i = 0;i < users.length;i++)
         {
-          var user =
+          if(users[i].username != req.params.username)
           {
-            firstname: users[i].firstname,
-            lastname: users[i].lastname,
-            dateOfBirth: users[i].dateOfBirth,
-            username: users[i].username
+            var user =
+            {
+              firstname: users[i].firstname,
+              lastname: users[i].lastname,
+              dateOfBirth: users[i].dateOfBirth,
+              username: users[i].username
+            }
+            allusers.push(user);
           }
-          allusers.push(user);
+          console.log(allusers)
+          var username1 = req.params.username;
         }
-        res.json({success: true, allusers, message: 'All Users'});
+        res.json({success: true, allusers, username1, message: 'All Users'});
       }
     });
   }

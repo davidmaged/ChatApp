@@ -1,3 +1,70 @@
-<p>
-  chat works!
-</p>
+
+<div class="home">
+
+	<!-- header section starts -->
+	<div class="header">
+		<div class="welcome-user">
+			<span>Hello {{username1}}</span>
+	<!--		<div class="home-navigation">
+				<ul>
+					<li (click)="logout()" >Logout</li>
+				</ul>
+			</div> -->
+		</div>
+	</div>
+	<!-- header section ends -->
+
+	<div class="row chat-body">
+
+		<!-- Messages section starts -->
+		<div class="col-md-8">
+			<div class="massege-wrapper">
+				<div class="massege-container">
+
+					<div
+						class="opposite-user">
+						Chatting with {{username2}}
+					</div>
+
+					<ul class="message-thread">
+
+						<li *ngFor="let message of messages"
+							[class.align-right]="message.sender == username1"
+							>
+								{{ message.content}}  {{messagetime}}
+						</li>
+					</ul>
+
+				</div>
+				<div class="message-typer">
+					<textarea
+						class="message form-control"
+						placeholder="Type and hit Enter"
+						[(ngModel)]="content"
+						(keyup.enter)="onSend()"
+					></textarea>
+				</div>
+			</div>
+		</div>
+		<!-- Messages section ends -->
+
+		<!-- User chat list section starts -->
+		<div class="col-md-4">
+			<div class="user-list-wrapper">
+				<ul class="user-list">
+
+					<!-- click event to handle the selection : selectedUser() -->
+					<!-- adding a class to indicate the selection -->
+					<li *ngFor="let user of allusers"
+						(click)="onChat(user.username)"
+						>
+							{{ user.username}}
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- User chat list section ends -->
+
+	</div>
+
+</div>
