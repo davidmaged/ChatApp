@@ -22,6 +22,12 @@ const port = process.env.PORT || 8080 ;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
+/*
+app.use('/api',router);
+app.get('*',(req,res)=>{
+  res.sendFile(__dirname + "/public/angular2");
+});
+*/
 app.use(cookieParser());
 app.use(morgan('dev'));
 //app.use(flash());
@@ -91,5 +97,5 @@ app.listen(port, function () {
 });
 
 io.sockets.on('connection',function(socket){
-  
+
 });
