@@ -13,7 +13,7 @@ import { AuthService } from './services/auth.service';
 
 const appRoutes: Routes =
 [
-  {path:'',component: HomeComponent}
+  {path:'home',component: HomeComponent}
 ]
 @NgModule({
   declarations: [

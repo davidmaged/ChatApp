@@ -1,25 +1,45 @@
+<h2 class="col-md-12 page-header">Home Page</h2>
 <form (submit)="onSignUpSubmit()">
-  <div class="form-group">
+  <div class="col-md-12 form-group">
     <h4>Insert First Name</h4>
-    <input type="text" [(ngModel)]="firstname" name="firstName" class="form-control" placeholder="First Name">
+    <input type="text" [(ngModel)]="firstname" name="firstName" class="col-md-4 form-control" placeholder="First Name">
   </div>
-  <div class="form-group">
+  <div class="col-md-12 form-group">
     <h4>Insert Last Name</h4>
-    <input type="text" [(ngModel)]="lastname" name="lastName" class="form-control" placeholder="Last Name">
+    <input type="text" [(ngModel)]="lastname" name="lastName" class="col-md-4 form-control" placeholder="Last Name">
   </div>
-  <div class="form-group">
+  <div class="col-md-12 form-group">
     <h4>Insert Username</h4>
-    <input type="text" [(ngModel)]="username" name="lastName" class="form-control" placeholder="Userame">
+    <input type="text" [(ngModel)]="username" name="lastName" class="col-md-4 form-control" placeholder="Userame">
   </div>
-  <div class="form-group">
+  <div class="col-md-12 form-group">
     <h4>Insert Password</h4>
-    <input type="text" [(ngModel)]="password" name="lastName" class="form-control" placeholder="Password">
+    <input type="text" [(ngModel)]="password" name="lastName" class="col-md-4 form-control" placeholder="Password">
   </div>
-  <div class="form-group">
+  <div class="col-md-12 form-group">
     <h4>Insert Birth Date</h4>
     <input type="Date" [(ngModel)]="dateOfBirth" name="lastName">
   </div>
   <br>
-  <input type="submit" class="btn btn-default" value="SignUp">
+  <div class="col-md-12 form-group">
+    <input type="submit" class="btn btn-primary" value="SignUp">
+  </div>
+  <br><br>
+</form>
+
+<h2 class="col-md-12 page-header">log in</h2>
+<form (submit)="onLogInSubmit()">
+  <div class="col-md-12 form-group">
+    <h4>Insert Username</h4>
+    <input type="text" [(ngModel)]="loginUsername" name="loginusername" class="col-md-4 form-control" placeholder="Userame">
+  </div>
+  <div class="col-md-12 form-group">
+    <h4>Insert Password</h4>
+    <input type="text" [(ngModel)]="loginPassword" name="loginPassword" class="col-md-4 form-control" placeholder="Password">
+  </div>
+  <br>
+  <div class="col-md-12 form-group">
+    <input type="submit" class="btn btn-primary" value="Login">
+  </div>
   <br><br>
 </form>

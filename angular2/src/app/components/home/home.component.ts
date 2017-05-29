@@ -12,11 +12,13 @@ import { Router } from '@angular/router';
   providers: [ValidateService, AuthService]
 })
 export class HomeComponent implements OnInit {
-  firstname: string;
-  lastname: string;
+  firstname: String;
+  lastname: String;
   dateOfBirth: Date;
-  username: string;
-  password: string;
+  username: String;
+  password: String;
+  loginUsername: String;
+  loginPassword: String;
 
   constructor(
     private ValidateService: ValidateService,
@@ -69,6 +71,26 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/home']);
         return false;
       });
+
+  }
+
+  onLogInSubmit(){
+    const user = {
+      username: this.loginUsername,
+      password: this.loginPassword
+    }
+
+    this.authService.loginUser(user).subscribe(data =>
+    {
+      console.log("auth");
+      if (data.success) {
+        this.flashMessage.show(data.message, { cssClass: 'alert-sucs', timeout: 4000 });
+        this.router.navigate(['/chat']);
+      } else {
+        this.flashMessage.show(data.message, { cssClass: 'alert-dang', timeout: 4000 });
+        //this.router.navigate(['/home']);
+      }
+    });
 
   }
 }

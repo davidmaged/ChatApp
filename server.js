@@ -11,6 +11,9 @@ var mongo = require('mongodb');
 var passport = require('passport');
 var expressValidator = require('express-validator');
 var session = require('express-session');
+var flash = require('connect-flash');
+var connect = require('connect');
+var cors = require('cors');
 var http = require('http');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
@@ -30,9 +33,9 @@ app.get('*',(req,res)=>{
 */
 app.use(cookieParser());
 app.use(morgan('dev'));
-//app.use(flash());
-//app.set('views', path.join(__dirname, 'views'));
-//app.use(cors());
+app.use(flash());
+app.set('views', path.join(__dirname, 'views'));
+app.use(cors());
 
 
 app.use(passport.initialize());
@@ -47,7 +50,7 @@ app.use(function (req, res, next) {
   res.locals.user = req.user || null;
   next();
 });
-
+*/
 
 // Express Validator
 app.use(expressValidator({
@@ -80,7 +83,7 @@ app.use(function (req, res, next) {
 
   next();
 });
-*/
+
 mongoose.Promise = global.Promise;
 mongoose.connect(DB_URI);
 var db = mongoose.connection;
