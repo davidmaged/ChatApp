@@ -3,6 +3,9 @@ import { ValidateService } from '../../services/validate.service'
 import { AuthService } from '../../services/auth.service'
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-chat',
@@ -151,6 +154,20 @@ export class ChatComponent implements OnInit {
         });
 
       }
+  }
+  logout()
+  {
+    this.authService.logout().subscribe(data =>
+    {
+      if(data.success)
+      {
+        this.flashMessage.show(data.message, { cssClass: 'alert-dang', timeout: 4000 });
+        this.router.navigate(['/home']);
+      }else
+      {
+        this.flashMessage.show(data.message, { cssClass: 'alert-dang', timeout: 4000 });
+      }
+    });
   }
 
 

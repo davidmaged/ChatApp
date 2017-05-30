@@ -14,5 +14,6 @@ router.get('/chats/:username', userController.passportauth, userController.openC
 router.get('/chat/:username1/:username2', userController.passportauth, userController.openMessage);
 router.get('/allusers/:username', userController.passportauth, userController.allUsers);
 router.post('/send',userController.passportauth, userController.send);
+router.post('/logout',userController.logout);
 
 module.exports = router;

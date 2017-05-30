@@ -91,9 +91,14 @@ export class AuthService {
   }
 
   logout() {
+    var username1 = localStorage.getItem('storedUsername');
     this.authToken = null;
     this.user = null;
     localStorage.clear();
+    let headers = new Headers();
+    let ep = this.prepEndpoint('logout');
+    return this.http.post(ep, {username: username1}, { headers: headers })
+      .map(res => res.json());
   }
 
   prepEndpoint(ep) {

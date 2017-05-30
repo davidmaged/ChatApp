@@ -79,7 +79,7 @@ app.use(session({
 app.use(function (req, res, next) {
   req.session.user = req.user || null;
   res.locals.user = req.user || null;
-  req.session.businessOwner = req.businessOwner || null;
+  //eq.session.businessOwner = req.businessOwner || null;
 
   next();
 });
@@ -99,6 +99,14 @@ app.listen(port, function () {
   console.log("server is listening on port" + port);
 });
 
-io.sockets.on('connection',function(socket){
+io.on('connection', (socket) => {
+  console.log('user connected');
 
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+
+  socket.on('send message', (message) => {
+    io.socket.emit('message', {type:'new-message', text: message});
+  });
 });

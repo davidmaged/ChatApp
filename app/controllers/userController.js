@@ -258,20 +258,56 @@ var userController = {
               firstname: users[i].firstname,
               lastname: users[i].lastname,
               dateOfBirth: users[i].dateOfBirth,
-              username: users[i].username
+              username: users[i].username,
+              online: users[i].online
             }
             allusers.push(user);
           }else{
             user1 = users[i];
+            user1.online = true;
+            user1.save(function(err,onuser)
+            {
+              if(err)
+                res.json({success: false, message: 'There is a Problem'});
+              else {
+                  console.log(onuser);
+                }
+            });
           }
           console.log(allusers)
 
         }
-        res.json({success: true, allusers, user1, message: 'All Users'});
+        res.json({success: true, allusers, user1, message: 'Wellcome to all Users'});
       }
     });
-  }
+  },
 
+  logout:function(req,res)
+  {
+    Users.findOne({username:req.body.username},function(err,user)
+    {
+      user.online = false;
+      if(err)
+      {
+        res.json({success: false, message: 'There is a Problem'});
+      }else
+      {
+
+        user.save(function(err,offuser)
+        {
+          if(err)
+            res.json({success: false, message: 'There is a Problem'});
+          else {
+              console.log(offuser);
+              res.json({success:true, message:'logout'});
+            }
+        });
+
+      }
+
+
+    });
+  }
 
 
 }
