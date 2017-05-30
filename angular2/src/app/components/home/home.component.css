@@ -30,8 +30,8 @@ body {
 	top: 35%;
 	left: 20%;
 	margin: -150px 0 0 -150px;
-	width:500px;
-	height:500px;
+	width:300px;
+	height:300px;
 }
 .login h1 { color: SteelBlue; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 
@@ -43,8 +43,8 @@ input::placeholder {
 	top: 35%;
 	left: 60%;
 	margin: -150px 0 0 -150px;
-	width:500px;
-	height:500px;
+	width:300px;
+	height:300px;
 }
 .signup h1 { color: SteelBlue; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 

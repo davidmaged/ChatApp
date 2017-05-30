@@ -18,7 +18,8 @@ var http = require('http');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 const port = process.env.PORT || 8080 ;
-
+server.listen(8180);
+var connected = [];
 
 
 // configure app
@@ -101,12 +102,16 @@ app.listen(port, function () {
 
 io.on('connection', (socket) => {
   console.log('user connected');
+  connected.push(socket);
 
   socket.on('disconnect', function(){
-    console.log('user disconnected');
+    connected.splice(connected.indexOf(socket),1);
+    console.log('user disconnected $s sockets connected', connected.legth);
   });
 
-  socket.on('send message', (message) => {
-    io.socket.emit('message', {type:'new-message', text: message});
+  socket.on('send-message', (sent) => {
+    //io.socket.to(<socketid>).emit('hey', 'I just met you');
+    io.sockets.emit('message', sent);
   });
+
 });

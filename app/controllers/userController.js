@@ -6,6 +6,7 @@ var passport = require('passport');
 require('../../config/passport')(passport);
 const secret = require('../../config/secret');
 
+
 var userController = {
 
   passportauth: passport.authenticate('jwt', { session: false }),

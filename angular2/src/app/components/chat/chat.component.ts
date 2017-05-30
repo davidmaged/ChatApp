@@ -14,6 +14,7 @@ import * as io from 'socket.io-client';
   providers: [ValidateService, AuthService]
 })
 export class ChatComponent implements OnInit {
+  socket = null;
   username1: String;
   username2: String;
   myusers: [String];
@@ -47,6 +48,15 @@ export class ChatComponent implements OnInit {
     private router: Router
   ) {
     window.scrollTo(0,0);
+    this.socket = io('http://localhost:8180');
+    this.socket.on('message',(sent) =>
+    {
+      //
+      if(sent.user2 == this.username1)
+      {
+        this.onChat(sent.user1)
+      }
+    });
   }
 
   ngOnInit() {
@@ -70,6 +80,7 @@ export class ChatComponent implements OnInit {
           }
           this.age = today.getFullYear() - this.dateOfBirth.getFullYear() - thisYear;
         }
+
 
       }else {
         console.log(data.allusers);
@@ -103,7 +114,8 @@ export class ChatComponent implements OnInit {
         });
   }
 
-  onChat(username2){
+  onChat(username2)
+  {
     this.username2 = username2;
     this.authService.getChat(this.username1,username2).subscribe(data =>
     {
@@ -111,6 +123,7 @@ export class ChatComponent implements OnInit {
       {
           console.log(data)
           this.messages = data.chat.message;
+
           //this.time.push(data.chat[i].message.date);
           //this.messages.push(data.chat[i].message.content);
       }else {
@@ -140,7 +153,9 @@ export class ChatComponent implements OnInit {
       {
         if(data.success)
         {
+          //
           this.messages = data.newChat.message;
+          this.socket.emit('send-message',{user1:this.username1,user2:this.username2});
         }else {
           console.log(message);
           this.flashMessage.show('Something went wrong', { cssClass: 'alert-dang', timeout: 4000 });
@@ -161,6 +176,7 @@ export class ChatComponent implements OnInit {
     {
       if(data.success)
       {
+        this.socket.emit('disconnect');
         this.flashMessage.show(data.message, { cssClass: 'alert-dang', timeout: 4000 });
         this.router.navigate(['/home']);
       }else

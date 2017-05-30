@@ -11,18 +11,7 @@
 </head>
 
 <body>
-  <div class="login">
-	<h1>Login</h1>
-    <form (submit)="onLogInSubmit()">
-    	<input type="text" [(ngModel)]="loginUsername" name="loginusername" placeholder="Username" required="required" />
-        <input type="password" [(ngModel)]="loginPassword" name="loginPassword" placeholder="Password" required="required" />
-        <button type="submit" class="btn btn-primary btn-block btn-large">Login</button>
-    </form>
-</div>
-
-</body>
-<body>
-  <div class="signup">
+  <div class="signup col-md-4">
 	<h1>Sign Up</h1>
     <form (submit)="onSignUpSubmit()">
       <input type="text" [(ngModel)]="firstname" name="firstname" class="col-md-4 form-control" placeholder="First Name">
@@ -34,6 +23,15 @@
         <input type="Date" [(ngModel)]="dateOfBirth" name="dateOfBirth">
       </div>
       <button type="submit" class="btn btn-primary btn-block btn-large">Signup</button>
+    </form>
+  </div>
+
+<div class="login col-md-4">
+	<h1>Login</h1>
+    <form (submit)="onLogInSubmit()">
+    	<input type="text" [(ngModel)]="loginUsername" name="loginusername" placeholder="Username" required="required" />
+        <input type="password" [(ngModel)]="loginPassword" name="loginPassword" placeholder="Password" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Login</button>
     </form>
 </div>
 
