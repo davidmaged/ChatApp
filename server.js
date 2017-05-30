@@ -106,7 +106,7 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', function(){
     connected.splice(connected.indexOf(socket),1);
-    console.log('user disconnected $s sockets connected', connected.legth);
+    console.log('user disconnected $s sockets connected', connected.length);
   });
 
   socket.on('send-message', (sent) => {
