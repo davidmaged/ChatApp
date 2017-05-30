@@ -248,6 +248,7 @@ var userController = {
         res.json({success: false, message: 'There is a Problem'});
       else {
         var allusers = [];
+        var user1 = new Users();
         for(var i = 0;i < users.length;i++)
         {
           if(users[i].username != req.params.username)
@@ -260,11 +261,13 @@ var userController = {
               username: users[i].username
             }
             allusers.push(user);
+          }else{
+            user1 = users[i];
           }
           console.log(allusers)
-          var username1 = req.params.username;
+
         }
-        res.json({success: true, allusers, username1, message: 'All Users'});
+        res.json({success: true, allusers, user1, message: 'All Users'});
       }
     });
   }

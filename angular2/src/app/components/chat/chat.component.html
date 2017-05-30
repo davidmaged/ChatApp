@@ -1,70 +1,68 @@
 
-<div class="home">
+  <div class="home" style="padding-top: 50px;">
 
-	<!-- header section starts -->
-	<div class="header">
-		<div class="welcome-user">
-			<span>Hello {{username1}}</span>
-	<!--		<div class="home-navigation">
-				<ul>
-					<li (click)="logout()" >Logout</li>
-				</ul>
-			</div> -->
-		</div>
-	</div>
-	<!-- header section ends -->
+  	<!-- header section starts -->
+  	<div class="header">
+  		<div class="welcome-user">
+  			<span>Hello {{username1}}</span>
+  	<!--		<div class="home-navigation">
+  				<ul>
+  					<li (click)="logout()" >Logout</li>
+  				</ul>
+  			</div> -->
+  		</div>
+  	</div>
+  	<!-- header section ends -->
 
-	<div class="row chat-body">
+  	<div class="row chat-body">
 
-		<!-- Messages section starts -->
-		<div class="col-md-8">
-			<div class="massege-wrapper">
-				<div class="massege-container">
+  		<!-- User chat list section starts -->
+  		<div class="col-md-4">
+  			<div class="user-list-wrapper">
+  				<ul class="user-list">
 
-					<div
-						class="opposite-user">
-						Chatting with {{username2}}
-					</div>
+  					<!-- click event to handle the selection : selectedUser() -->
+  					<!-- adding a class to indicate the selection -->
+  					<li *ngFor="let user of allusers"
+  						(click)="onChat(user.username)"
+  						>
+  							{{ user.username}}
+  					</li>
+  				</ul>
+  			</div>
+  		</div>
+  		<!-- User chat list section ends -->
+      <!-- Messages section starts -->
+      <div class="col-md-8">
+        <div class="massege-wrapper">
+          <div class="massege-container">
 
-					<ul class="message-thread">
+            <div
+              class="opposite-user">
+              Chatting with {{username2}}
+            </div>
 
-						<li *ngFor="let message of messages"
-							[class.align-right]="message.sender == username1"
-							>
-								{{ message.content}}  {{messagetime}}
-						</li>
-					</ul>
+            <ul class="message-thread">
 
-				</div>
-				<div class="message-typer">
-					<textarea
-						class="message form-control"
-						placeholder="Type and hit Enter"
-						[(ngModel)]="content"
-						(keyup.enter)="onSend()"
-					></textarea>
-				</div>
-			</div>
-		</div>
-		<!-- Messages section ends -->
+              <li *ngFor="let message of messages"
+                [class.align-right]="message.sender == username1"
+                >
+                  {{ message.content}}  {{message.time}}
+              </li>
+            </ul>
 
-		<!-- User chat list section starts -->
-		<div class="col-md-4">
-			<div class="user-list-wrapper">
-				<ul class="user-list">
+          </div>
+          <div class="message-typer">
+            <textarea
+              class="message form-control"
+              placeholder="Type and hit Enter"
+              [(ngModel)]="content"
+              (keyup.enter)="onSend()"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <!-- Messages section ends -->
+  	</div>
 
-					<!-- click event to handle the selection : selectedUser() -->
-					<!-- adding a class to indicate the selection -->
-					<li *ngFor="let user of allusers"
-						(click)="onChat(user.username)"
-						>
-							{{ user.username}}
-					</li>
-				</ul>
-			</div>
-		</div>
-		<!-- User chat list section ends -->
-
-	</div>
-
-</div>
+  </div>

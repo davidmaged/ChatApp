@@ -11,11 +11,15 @@ import { Router } from '@angular/router';
   providers: [ValidateService, AuthService]
 })
 export class ChatComponent implements OnInit {
-  username1: string;
-  username2: string;
+  username1: String;
+  username2: String;
   myusers: [String];
   allusers:[String];
   content: String;
+  firstname: String;
+  lastname: String;
+  dateOfBirth: Date;
+  age: Number;
   //time:[Date];
   //messages:[String];
   //sender:[String];
@@ -48,7 +52,22 @@ export class ChatComponent implements OnInit {
       if(data.success)
       {
         this.allusers = data.allusers;
-        this.username1 = data.username1;
+        this.username1 = data.user1.username;
+        this.firstname = data.user1.firstname;
+        this.lastname = data.user1.lastname;
+        this.dateOfBirth = data.user1.dateOfBirth;
+        if (this.dateOfBirth) {
+          this.dateOfBirth = new Date(this.dateOfBirth);
+          var today = new Date();
+          var thisYear = 0;
+          if (today.getMonth() < this.dateOfBirth.getMonth()) {
+            thisYear = 1;
+          } else if ((today.getMonth() == this.dateOfBirth.getMonth()) && today.getDate() < this.dateOfBirth.getDate()) {
+            thisYear = 1;
+          }
+          this.age = today.getFullYear() - this.dateOfBirth.getFullYear() - thisYear;
+        }
+
       }else {
         console.log(data.allusers);
         this.flashMessage.show('Something went wrong', { cssClass: 'alert-dang', timeout: 4000 });

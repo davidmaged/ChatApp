@@ -1,15 +1,17 @@
 .header{
-	background-color: rgba(80, 208, 193, 0.51);
-    margin-bottom: 5px;
-    box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.32);
+	background-color: rgba(0,0,0,0.3);
+    border-radius: 5px;
+    margin-bottom: 25px;
+    box-shadow: 0px 1px 10px 1px Snow;
 }
 
 .welcome-user{
 	padding: 25px;
-    color: #444444;
+    color: LightGoldenRodYellow ;
 }
 
 .welcome-user span{
+
 	font-size: 30px;
 }
 
@@ -26,19 +28,25 @@
 .chat-body{
 	width: 100%;
 	padding: 10px;
+  background-color: transparent;
 }
 
 .massege-container{
-    background-color: rgba(80, 208, 193, 0.51);
+    background-color: rgba(0,0,0,0.3);
+
 }
 
 .opposite-user{
-    background-color: rgba(0, 0, 0, 0.54);
+  border-radius: 5px;
+    background-color: rgba(0,0,0,0.3) ;
     width: 100%;
-    color: #fff;
+    height: 100%;
+    color: Snow;
     text-align: center;
+    font-size: 30px;
 }
 .message-thread{
+  border-radius: 5px;
 	overflow-y: scroll;
 	list-style-type: none;
 	height: 400px;
@@ -49,7 +57,7 @@
 }
 
 .message-thread li{
-	max-width: 300px;
+	max-width: 500px;
     border-color: solid 0.5px rgba(0, 0, 0, 0.32);
     clear: both;
     text-decoration: none;
@@ -67,7 +75,7 @@
     background-color: rgba(255, 255, 255, 0.80);
     line-height: 1.4;
     word-wrap: break-word;
-    color: #444444;
+    color: SteelBlue;
     text-align: left;
 }
 
@@ -77,16 +85,18 @@
 }
 
 .message-typer{
-	padding-top: 20px;
+	padding-top: 50px;
+
 }
 
 
 .user-list{
+  border-radius: 5px;
 	padding: 10px;
 	overflow-y: scroll;
 	height: 423px;
 	width: 100%;
-    background-color: rgba(80, 208, 193, 0.51);
+    background-color: rgba(0,0,0,0.3);
 }
 
 .user-list li{
@@ -94,7 +104,7 @@
 	padding: 20px;
 	list-style-type: none;
 	margin-bottom: 5px;
-    color: #444444;
+    color: SteelBlue;
     width: 100% !important;
     border-radius: 5px;
     box-shadow: 0px 3px 3px rgba(172, 172, 172, 0.73);
@@ -106,7 +116,7 @@
 }
 
 .selected-user{
-	border-left: solid 3px rgb(2, 39, 35);
+	border-left: solid 9px rgb(2, 39, 35);
 }
 
 .overlay{
