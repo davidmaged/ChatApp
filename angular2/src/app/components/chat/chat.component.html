@@ -7,7 +7,7 @@
   			<span>Hello {{username1}}</span>
   	 		<div class="home-navigation">
   				<ul>
-  					<li (click)="logout()" >Logout</li>
+  					<input type="button" (click)="logout()" value="Logout" id="click-btn">
   				</ul>
   			</div>
   		</div>
@@ -23,10 +23,9 @@
 
   					<!-- click event to handle the selection : selectedUser() -->
   					<!-- adding a class to indicate the selection -->
-  					<li *ngFor="let user of allusers"
-  						(click)="onChat(user.username)"
-  						>
-  							{{ user.username}}
+  					<li *ngFor="let user of allusers" (click)="onChat(user.username)"  >
+                <span *ngIf="user.online" class="time" style="color:green;">{{ user.username}}</span>
+                <span *ngIf="!user.online" class="time" style="color:red;">{{ user.username}}</span>
   					</li>
   				</ul>
   			</div>
@@ -47,7 +46,7 @@
               <li *ngFor="let message of messages"
                 [class.align-right]="message.sender == username1"
                 >
-                  {{ message.content}}  {{message.time}}
+                  {{ message.content}}
               </li>
             </ul>
 

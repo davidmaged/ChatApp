@@ -132,3 +132,16 @@
 .overlay-display{
     display: none;
 }
+.online{
+	color: green;
+}
+#click-btn {
+border: 1px solid rgba(10, 180, 180, 1);
+background: rgba(20, 20, 20, .6);
+font-size: 18px;
+color: white;
+margin-top: 0px;
+padding: 10px 50px;
+cursor: pointer;
+transition: .4s;
+}

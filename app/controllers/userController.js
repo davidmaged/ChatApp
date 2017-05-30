@@ -18,8 +18,9 @@ var userController = {
     }else
     {
       var today = new Date();
+      var birthdate = new Date(req.body.dateOfBirth);
       var year = today.getFullYear() - 12;
-      if(req.body.dateOfBirth && req.body.dateOfBirth.getFullYear() > year){
+      if(req.body.dateOfBirth && birthdate.getFullYear() > year){
         res.json({ success: false, message: 'You need to be older to register' });
       }
       Users.findOne({username: req.body.username},function(err,user){
