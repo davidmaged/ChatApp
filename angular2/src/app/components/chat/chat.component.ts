@@ -14,7 +14,7 @@ import * as io from 'socket.io-client';
   providers: [ValidateService, AuthService]
 })
 export class ChatComponent implements OnInit {
-  socket = null;
+  //socket = null;
   username1: String;
   username2: String;
   myusers: [String];
@@ -47,9 +47,8 @@ export class ChatComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
-    window.scrollTo(0,0);
-    this.socket = io('http://localhost:8180');
-    this.socket.on('message',(sent) =>
+    window.scrollTo(0,0)
+    this.authService.socket.on('message',(sent) =>
     {
       //
       if(sent.user2 == this.username1)
@@ -57,13 +56,28 @@ export class ChatComponent implements OnInit {
         this.onChat(sent.user1)
       }
     });
+    console.log(this.authService.socket + 'dh el socket');
+    this.authService.socket.on('sallusers' , function(){
+      console.log('hnak');
+      this.ngOnInit();
+    });
+    this.authService.socket.on('allusers' , function(){
+      console.log('hnak');
+      this.ngOnInit();
+    });
   }
 
   ngOnInit() {
+    this.onAllUsers();
+
+
+  }
+  onAllUsers(){
     this.authService.getAllUsers().subscribe(data =>
     {
       if(data.success)
       {
+
         this.allusers = data.allusers;
         this.username1 = data.user1.username;
         this.firstname = data.user1.firstname;
@@ -155,7 +169,7 @@ export class ChatComponent implements OnInit {
         {
           //
           this.messages = data.newChat.message;
-          this.socket.emit('send-message',{user1:this.username1,user2:this.username2});
+          this.authService.socket.emit('send-message',{user1:this.username1,user2:this.username2});
         }else {
           console.log(message);
           this.flashMessage.show('Something went wrong', { cssClass: 'alert-dang', timeout: 4000 });
@@ -176,7 +190,7 @@ export class ChatComponent implements OnInit {
     {
       if(data.success)
       {
-        this.socket.emit('disconnect');
+        this.authService.socket.emit('disconnect');
         this.flashMessage.show(data.message, { cssClass: 'alert-dang', timeout: 4000 });
         this.router.navigate(['/home']);
       }else

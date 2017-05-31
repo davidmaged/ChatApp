@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
+import * as io from 'socket.io-client';
 //import { localVersion } from '../global';
 
 @Injectable()
@@ -11,8 +12,10 @@ export class AuthService {
   username:string;
   isDev: boolean;
   rootURL: String;
+  socket= io('http://localhost:8180');
   constructor(private http: Http) {
     this.isDev = false;
+    //this.socket =
   }
   sendmesg(message){
     let headers = new Headers();
@@ -73,6 +76,7 @@ export class AuthService {
   {
     localStorage.setItem('storedUsername', data.user.username);
     localStorage.setItem('id_token', data.token);
+    //localstorage.setItem('socket',data.socket);
   }
 
   loadToken() {

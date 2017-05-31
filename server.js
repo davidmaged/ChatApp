@@ -107,11 +107,21 @@ io.on('connection', (socket) => {
   socket.on('disconnect', function(){
     connected.splice(connected.indexOf(socket),1);
     console.log('user disconnected $s sockets connected', connected.length);
+    socket.emit('logout')
   });
 
   socket.on('send-message', (sent) => {
     //io.socket.to(<socketid>).emit('hey', 'I just met you');
     io.sockets.emit('message', sent);
   });
+  socket.on('login',(username) => {
+
+  socket.emit('allusers',username);
+});
+socket.on('signup',(username) => {
+  console.log('hena');
+  socket.emit('sallusers');
+
+});
 
 });

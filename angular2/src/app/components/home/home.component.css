@@ -27,8 +27,8 @@ body {
 }
 .login {
 	position: absolute;
-	top: 35%;
-	left: 20%;
+	top: 25%;
+	left: 50%;
 	margin: -150px 0 0 -150px;
 	width:300px;
 	height:300px;
@@ -40,8 +40,8 @@ input::placeholder {
 }
 .signup {
 	position: absolute;
-	top: 35%;
-	left: 60%;
+	top: 60%;
+	left: 50%;
 	margin: -150px 0 0 -150px;
 	width:300px;
 	height:300px;

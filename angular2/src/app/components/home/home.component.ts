@@ -59,6 +59,8 @@ export class HomeComponent implements OnInit {
       console.log(data)
       if (data.success) {
         this.authService.storeData(data);
+        this.authService.socket.emit('signup',{username:user.username});
+        console.log(this.authService.socket);
         this.flashMessage.show(data.message, { cssClass: 'alert-sucs', timeout: 4000 });
         this.router.navigate(['/chat']);
       } else {
@@ -83,6 +85,7 @@ export class HomeComponent implements OnInit {
     {
       if(data.success)
       {
+        this.authService.socket.emit('login',{username:user.username});
         this.authService.storeData(data);
         this.flashMessage.show(data.message, { cssClass: 'alert-sucs', timeout: 4000 });
         this.router.navigate(['/chat']);
