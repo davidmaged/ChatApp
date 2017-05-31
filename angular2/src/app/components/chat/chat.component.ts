@@ -48,7 +48,7 @@ export class ChatComponent implements OnInit {
     private router: Router
   ) {
     window.scrollTo(0,0);
-    this.socket = io('http://localhost:8180');
+    this.socket = io('http://chatapp.ga:8180');
     this.socket.on('message',(sent) =>
     {
       //
