@@ -106,7 +106,7 @@ export class AuthService {
 
       return ep;
     } else {
-      return 'http://localhost:8080/' + ep;
+      return 'http://chatapp.ga:8080/' + ep;
       //return 'http://localhost:8080/' + ep;
     }
   }
