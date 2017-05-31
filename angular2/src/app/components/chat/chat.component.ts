@@ -47,10 +47,11 @@ export class ChatComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
+
     window.scrollTo(0,0)
     this.authService.socket.on('message',(sent) =>
     {
-      //
+
       if(sent.user2 == this.username1)
       {
         this.onChat(sent.user1)
