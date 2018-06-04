@@ -1,11 +1,10 @@
-# ChatApp
+# Requirments:
+1. install python 3.6.4
+2. install anaconda through this link https://machinelearningmastery.com/setup-python-environment-machine-learning-deep-learning-anaconda/
+3. install Keras-contrib through this link https://github.com/keras-team/keras-contrib
+4. install gensim through https://radimrehurek.com/gensim/install.html
 
-A. Install invironment setup through https://github.com/abdelrahman-elkady/se-tutorial/blob/master/environment_setup.md
-
-B. Clone this repo
-
-C. On folder chatApp open terminal and run commands "$npm install" then "$nodemon server.js"
-
-D. Browse to folder ChatApp -> angular2 then open terminal and run commands "$npm install" then "$npm start"
-
-E. Browse to the website from this URL http://localhost:4200
+# Run code 
+1. Open anaconda prompt and cd to the director that has the source code
+2. run jupyter notebook and then ofen the file
+3. press shift + enter on every seprate piece of code to compile it
